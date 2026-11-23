@@ -1,0 +1,37 @@
+# ---- Source ----
+source:
+  base_url: https://d37ci6vzurychx.cloudfront.net/trip-data
+  file_pattern: "yellow_tripdata_{year}-{month:02d}.parquet"
+  timeout_seconds: 120
+
+# ---- What to process ----
+# Leave year/months empty (null) to use "lag_months before today"
+run:
+  year: 2025
+  months: [1]
+  lag_months: 2
+  start_date: 2025-01-01
+  end_date: 2025-02-01
+
+# ---- Folders (relative to the project root) ----
+paths:
+  raw: data/yellow_taxi/raw
+  artifacts: artifacts
+
+split:
+  cutoff: 2025-01-25      # train < cutoff <= validation
+  train_sample: 500000    # keep RF training fast
+
+mlflow:
+  tracking_uri: http://127.0.0.1:5000
+  experiment: nyc-taxi-duration
+  registered_model: taxi-duration
+
+serving:
+  model_alias: champion
+
+model:
+  n_estimators: 100
+  max_depth: 20
+  min_samples_leaf: 5
+  random_state: 42

@@ -34,3 +34,10 @@ dev = [
 required-version = ">=0.13.5"
 # Apply certificate fixes without adding unused runtime packages.
 constraint-dependencies = ["certifi>=2026.10.19", "pip>=26.2.2"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["src", "app"]
