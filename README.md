@@ -26,7 +26,6 @@ flowchart LR
 | `src/data.py` | `load_raw()`, `clean()`, `split_by_date()` |
 | `src/features.py` | `prepare_features()`, shared by training and the API |
 | `src/pipeline.py` | scikit-learn `Pipeline`: feature step + `RandomForestRegressor` |
-| `src/model_io.py` | `TRUSTED_TYPES` for skops; optional local save/load helpers |
 | `src/train.py` | Trains, logs params/metrics to MLflow, registers the pipeline as `taxi-duration` |
 | `app/schema.py`, `app/main.py` | FastAPI schema and app; loads `models:/taxi-duration@champion` at startup |
 | `notebooks/` | EDA (`1_eda`), analysis (`2_analysis`), model experiments (`3_model`) |
